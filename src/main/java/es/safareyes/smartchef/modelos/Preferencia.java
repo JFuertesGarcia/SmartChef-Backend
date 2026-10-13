@@ -14,16 +14,15 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 @Table(name = "preferencia")
 public class Preferencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @EqualsAndHashCode.Include
     private Integer id;
 
-    @Column(name = "tipo")
+    @Column(name = "tipo", nullable = false)
     private Integer tipo;
 }

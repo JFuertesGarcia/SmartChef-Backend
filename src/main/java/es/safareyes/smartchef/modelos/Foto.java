@@ -24,6 +24,9 @@ public class Foto {
     @EqualsAndHashCode.Include
     private Integer id;
 
+    @Column(name = "url_imagen", length = 500)
+    String url;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_receta")
     @ToString.Exclude

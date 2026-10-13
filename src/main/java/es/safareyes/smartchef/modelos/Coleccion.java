@@ -14,19 +14,17 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 @Table(name = "coleccion")
 public class Coleccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @EqualsAndHashCode.Include
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
-    @ToString.Exclude
     private Usuario usuario;
 
     @Column(name = "nombre")
@@ -37,6 +35,5 @@ public class Coleccion {
             name = "receta_coleccion",
             joinColumns = @JoinColumn(name = "id_coleccion"),
             inverseJoinColumns = @JoinColumn(name = "id_receta"))
-    @ToString.Exclude
     private Set<Receta> recetas = new HashSet<>();
 }

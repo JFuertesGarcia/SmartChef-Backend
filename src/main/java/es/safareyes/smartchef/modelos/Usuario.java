@@ -1,6 +1,7 @@
 package es.safareyes.smartchef.modelos;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.Fetch;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,14 +15,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 @Table(name = "usuario")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(name = "rol")
@@ -30,24 +30,21 @@ public class Usuario {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "contrasenya")
-    @ToString.Exclude
+    @Column(name = "contrasenya", nullable = false)
     private String contrasenya;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "usuario_preferencia",
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_preferencia"))
-    @ToString.Exclude
     private Set<Preferencia> preferencias = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "lista_compra",
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_ingrediente"))
-    @ToString.Exclude
     private Set<Ingrediente> listaCompra = new HashSet<>();
 
 }

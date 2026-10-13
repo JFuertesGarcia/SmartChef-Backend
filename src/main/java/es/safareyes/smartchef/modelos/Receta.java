@@ -14,14 +14,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 @Table(name = "receta")
 public class Receta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(name = "raciones")
@@ -43,7 +42,6 @@ public class Receta {
     private String descripcion;
 
 
-    @ManyToMany(mappedBy = "recetas")
-    @ToString.Exclude
+    @ManyToMany(mappedBy = "recetas", fetch = FetchType.LAZY)
     private Set<Coleccion> colecciones = new HashSet<>();
 }

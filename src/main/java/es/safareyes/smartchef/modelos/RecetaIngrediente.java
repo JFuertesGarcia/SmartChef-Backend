@@ -14,24 +14,21 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 @Table(name = "receta_ingrediente")
 public class RecetaIngrediente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @EqualsAndHashCode.Include
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_ingrediente")
-    @ToString.Exclude
+    @JoinColumn(name = "id_ingrediente",nullable = false)
     private Ingrediente ingrediente;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_receta")
-    @ToString.Exclude
+    @JoinColumn(name = "id_receta",nullable = false)
     private Receta receta;
 
     @Column(name = "cantidad")

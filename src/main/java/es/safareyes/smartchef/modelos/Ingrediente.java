@@ -14,17 +14,16 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 @Table(name = "ingrediente")
 public class Ingrediente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @EqualsAndHashCode.Include
     private Integer id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false, unique = true)
     private String nombre;
 
     @Column(name = "vegetariano")

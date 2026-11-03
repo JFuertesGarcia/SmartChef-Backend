@@ -79,6 +79,8 @@ public interface IRecetaRepository extends JpaRepository<Receta, Long>, JpaSpeci
     @Modifying(clearAutomatically = true)
     @Query(value = "DELETE FROM despensa WHERE caducidad < :fechaLimite", nativeQuery = true)
     void eliminarIngredientesCaducados(@Param("fechaLimite") LocalDateTime fechaLimite);
+
+    
     
     // ==========================================
     // Q6: Paginación y ordenación (Mínimo 1)

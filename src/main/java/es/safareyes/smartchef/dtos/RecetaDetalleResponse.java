@@ -10,6 +10,9 @@ public record RecetaDetalleResponse(
         Float tiempo,
         Integer calorias,
         Integer dificultad,
+        Double coste,
+        Boolean vegetariana,
+        Boolean sinGluten,
         List<PasoResponse> pasos,
         List<RecetaIngredienteResponse> ingredientes,
         List<FotoResponse> fotos

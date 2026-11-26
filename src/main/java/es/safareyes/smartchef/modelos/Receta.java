@@ -2,10 +2,8 @@ package es.safareyes.smartchef.modelos;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,13 +12,14 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "receta")
 public class Receta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(name = "raciones")
@@ -41,7 +40,17 @@ public class Receta {
     @Column(name = "descripcion")
     private String descripcion;
 
+    /** NUEVO: chef que creó la receta. */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_autor")
+    @ToString.Exclude
+    private Usuario autor;
+
+    /** NUEVO: false = receta retirada (baja lógica). */
+    @Column(name = "activa", nullable = false)
+    private Boolean activa = true;
 
     @ManyToMany(mappedBy = "recetas", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private Set<Coleccion> colecciones = new HashSet<>();
 }
